@@ -11,7 +11,9 @@ const models = require('./models');
 const env = nunjucks.configure('views', {noCache: true});
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
-app.use(bodyParser.json());
+// body parsing middleware
+app.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
+app.use(bodyParser.json()); // would be for AJAX requests
 
 app.get('/', (req, res, next) => {
     res.render('index'); 

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = new Sequelize('postgres://localhost:5432/wikistack',
 {
-    //logging: false
+    logging: false
 });
 
 const Page = db.define('page', 
@@ -32,9 +32,24 @@ const Page = db.define('page',
     }
 },
 {
+    hooks:  
+    {
+        beforeValidate: function (page)
+        {
+            if (page.title)
+            {
+                page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+            }
+            else
+            {
+                page.urlTitle = Math.random().toString(36).substring(2, 7);
+            }
+        }
+    },
+
     getterMethods:
     {
-        router()
+        router: function ()
         {
             return '/wiki/' + this.urlTitle;
         }
