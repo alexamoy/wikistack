@@ -11,6 +11,11 @@ const models = require('./models');
 const env = nunjucks.configure('views', {noCache: true});
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
+app.use(bodyParser.json());
+
+app.get('/', (req, res, next) => {
+    res.render('index'); 
+})
 
 app.use('/', router);
 

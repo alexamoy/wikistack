@@ -3,17 +3,18 @@ const router = express.Router();
 
 router.get('/', function (req, res, next)
 {
-    res.send('fkdalfjdksf');
+    res.redirect('/');
 });
 
 router.post('/', function (req, res, next)
 {
-    res.send('Second fkdalfjdksf');
+    res.json(req.body);
 });
 
 router.get('/add', function (req, res, next)
 {
-    res.send('Third fkdalfjdksf');
+    res.render('addpage');
+
 });
 
 module.exports = router;
