@@ -14,7 +14,7 @@ app.engine('html', nunjucks.render);
 
 app.use('/', router);
 
-models.db.sync()
+models.db.sync({force: true})
 .then(()=>{
     console.log('All tables created!'); 
     app.listen(3000, function(){
@@ -23,4 +23,6 @@ models.db.sync()
 })
 .catch(console.error.bind(console)); 
 
-models.db.sync({force: true});
+// app.listen(3000, function(){
+//     console.log("I'm listening");
+// });
